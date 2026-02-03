@@ -11,38 +11,28 @@ ACurrencyPickup::ACurrencyPickup()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Mesh->SetupAttachment(RootComponent);
 
 	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Collision"));
-	Collision->OnComponentBeginOverlap.AddDynamic(this, &ACurrencyPickup::OnOverlapBegin);
 	Collision->SetupAttachment(RootComponent);
 }
 
 
-void ACurrencyPickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ACurrencyPickup::CollectCurrency(UCurrencyManager* CurrencyManagerComponent)
 {
-	if (!OtherActor)
+	if (!CurrencyManagerComponent)
 		return;
 
-	if (!GetCurrencyManager(OtherActor))
+	if (bIsMoving)
 		return;
 
-	Target = GetCurrencyManager(OtherActor);
+	Target = CurrencyManagerComponent;
 	bIsMoving = true;
 
 	SetActorEnableCollision(false);
-}
-
-UCurrencyManager* ACurrencyPickup::GetCurrencyManager(AActor* Actor) const
-{
-	if (!Actor)
-		return nullptr;
-
-	return Cast<UCurrencyManager>(Actor->GetComponentByClass(UCurrencyManager::StaticClass()));
 }
 
 // Called when the game starts or when spawned

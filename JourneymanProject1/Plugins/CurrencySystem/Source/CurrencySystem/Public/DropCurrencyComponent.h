@@ -2,22 +2,26 @@
 
 #pragma once
 
+#include "CurrencyPickup.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "CurrencyManager.generated.h"
+#include "DropCurrencyComponent.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class JOURNEYMANPROJECT1_API UCurrencyManager : public USceneComponent
+class CURRENCYSYSTEM_API UDropCurrencyComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UCurrencyManager();
+	UDropCurrencyComponent();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Currency")
-	int32 CurrencyAmount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Currency Dropping")
+	TArray<TSubclassOf<ACurrencyPickup>> Drops;
+
+	UFUNCTION(BlueprintCallable, Category = "Currency Dropping")
+	void DropCurrency(FTransform SpawnTransform);
 
 protected:
 	// Called when the game starts
@@ -27,7 +31,5 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	FVector GetCollectionPointLocation() const;
-
-	void AddCurrency(int32 Amount);
+		
 };
