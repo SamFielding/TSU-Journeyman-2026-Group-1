@@ -13,10 +13,10 @@ ULockOn::ULockOn()
 
 void ULockOn::OnLockOnPressed()
 {
-	//LockOnNearest();
+	LockOnNearest();
 
 	CameraTransform = Camera->GetRelativeTransform();
-	Camera->SetWorldTransform(InitialCameraTransform);
+	Camera->SetRelativeTransform(InitialCameraTransform);
 
 	if(APlayerController* Controller = Cast<APlayerController>(GetOwner()->GetInstigatorController()))
 	{

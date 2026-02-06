@@ -5,10 +5,8 @@
 #include "Components/SphereComponent.h"
 #include "CurrencyManager.h"
 
-// Sets default values
 ACurrencyPickup::ACurrencyPickup()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
@@ -35,14 +33,12 @@ void ACurrencyPickup::CollectCurrency(UCurrencyManager* CurrencyManagerComponent
 	SetActorEnableCollision(false);
 }
 
-// Called when the game starts or when spawned
 void ACurrencyPickup::BeginPlay()
 {
 	Super::BeginPlay();
 
 }
 
-// Called every frame
 void ACurrencyPickup::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -56,12 +52,14 @@ void ACurrencyPickup::Tick(float DeltaTime)
 	if (!Target)
 		return;
 
+	TimeSinceCollected += DeltaTime;
+	float VelocityCoefficient = FMath::Pow(3.f * TimeSinceCollected, 3.f * TimeSinceCollected) - 1;
 	FVector Direction = (Target->GetCollectionPointLocation() - GetActorLocation()).GetSafeNormal();
-	FVector NewLocation = GetActorLocation() + Direction * AttractionStrength * DeltaTime;
+	FVector NewLocation = GetActorLocation() + Direction * AttractionStrength * VelocityCoefficient * DeltaTime;
 
 	SetActorLocation(NewLocation);
 
-	if (FVector::Dist(NewLocation, Target->GetCollectionPointLocation()) < 10.f)
+	if (FVector::Dist(NewLocation, Target->GetCollectionPointLocation()) <= AttractionStrength * VelocityCoefficient * DeltaTime)
 	{
 		Target->AddCurrency(CurrencyValue);
 		Destroy();
