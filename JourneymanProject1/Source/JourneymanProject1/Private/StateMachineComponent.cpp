@@ -14,6 +14,15 @@ UStateMachineComponent::UStateMachineComponent()
 }
 
 
+void UStateMachineComponent::ChangeCombatState(ECombatState OldState,ECombatState NewState)
+{
+	switch (switch_on)
+	{
+	default:
+		break;
+	}
+}
+
 // Called when the game starts
 void UStateMachineComponent::BeginPlay()
 {
