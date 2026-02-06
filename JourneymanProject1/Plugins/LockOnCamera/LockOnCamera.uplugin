@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "LockOnCamera",
+	"Description": "An actor component that extends camera functionality with lock-on capabilities. Actors that can be locked on to must implement the LockOnTarget component, that can be moved around to whereever the lock on pivot should be. Input is configurable",
+	"Category": "Other",
+	"CreatedBy": "Owen Dinsley",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "LockOnCamera",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
