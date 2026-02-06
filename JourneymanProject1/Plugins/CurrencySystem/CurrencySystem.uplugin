@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "CurrencySystem",
+	"Description": "Gameplay system that incudes a CurrencyManager actor component that allows for the collection and management of currency granted by CurrencyPickup actors. Designers are to DERIVE FROM CURRENCYPICKUP when creating currency BP classes",
+	"Category": "Other",
+	"CreatedBy": "Owen Dinsley",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "CurrencySystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
