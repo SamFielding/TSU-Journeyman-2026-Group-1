@@ -10,7 +10,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCombatStateEnter, ECombatState, OldState, ECombatState, NewState);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCombatStateEnter, ECombatState, OldState, ECombatState, NewState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCombatStateExit, ECombatState, OldState, ECombatState, NewState);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class JOURNEYMANPROJECT1_API UStateMachineComponent : public UActorComponent
@@ -23,6 +23,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "State Machine")
 	FOnCombatStateEnter OnCombatStateEnter;
+
+	UPROPERTY(BlueprintAssignable, Category = "State Machine")
+	FOnCombatStateExit OnCombatStateExit;
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeCombatState(ECombatState OldState,ECombatState NewState);
